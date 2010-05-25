@@ -1,5 +1,6 @@
 require 'nokogiri'
 require 'date'
+require 'active_support/core_ext'
 
 module G2L
   class Input
@@ -17,8 +18,9 @@ module G2L
         parent = account.xpath("act:parent")[0]
 
         all.update(id => {
-          :name   => account.xpath("act:name")[0].text,
-          :parent => parent ? parent.text : nil
+          :name      => account.xpath("act:name")[0].text,
+          :commodity => account.xpath("act:commodity/cmdty:id")[0].try(:text),
+          :parent    => parent ? parent.text : nil
         })
       end
 
@@ -30,7 +32,9 @@ module G2L
           :description => transaction.xpath("trn:description")[0].text,
           :splits => transaction.xpath("trn:splits/trn:split").map {|split| {
             :account    => split.xpath("split:account")[0].text,
+            :action     => split.xpath("split:action")[0].try(:text),
             :value      => parse_value(split.xpath("split:value")[0]),
+            :quantity   => parse_value(split.xpath("split:quantity")[0]),
             :reconciled => split.xpath("split:reconciled-state")[0].text == 'y'
           }}
         }
@@ -43,7 +47,14 @@ module G2L
           tx[:splits].any? {|y| y[:reconciled] } ? '* ' : '',
           tx[:description]
         ]] + tx[:splits].map {|split|
-          "  %-44s$%s" % [accounts[split[:account]][:name], split[:value]]
+          account = accounts[split[:account]]
+
+          value = if split[:action]
+            "%i %s" % [split[:quantity].to_i, account[:commodity]]
+          else
+            '$' + split[:quantity].to_s
+          end
+          "  %-44s%s" % [account[:name], value]
         }).join("\n")
       end.join("\n\n")
     end

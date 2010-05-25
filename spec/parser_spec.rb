@@ -33,6 +33,18 @@ describe G2L::Input do
     end
   end
 
+  it 'parses commodities' do
+    input = File.open("spec/fixtures/commodities.xml").read
+    output = G2L::Input.new(input).to_ledger
+    with_entry(output,
+      :description => "Share purchase",
+      :date        => Date.new(2010, 4, 25)
+    ) do |entry|
+      entry.should have_transaction("Equity", -1209.60)
+      entry.should have_transaction("Brokerage", "120 BEN")
+    end
+  end
+
   def with_entry(output, opts)
     entries = parse_entries(output)
     entry = entries.detect {|x|
@@ -59,7 +71,8 @@ end
 Spec::Matchers.define :have_transaction do |desc, amount|
   match do |actual|
     parse_transactions(actual).detect {|tx|
-      tx[0] == desc && tx[1].to_f == amount
+      tx[1] = tx[1][1..-1].to_f if tx[1].starts_with?('$')
+      tx[0] == desc && tx[1] == amount
     }
   end
 
@@ -68,6 +81,6 @@ Spec::Matchers.define :have_transaction do |desc, amount|
   end
 
   def parse_transactions(input)
-    txs = actual.lines.to_a[1..-1].map {|x| x.match(/  (.*?)\s+\$(-?\d+\.\d+)/).captures }
+    txs = actual.lines.to_a[1..-1].map {|x| x.match(/  (.*?)\s{5,}(.*)/).try(:captures) || [] }
   end
 end

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<gnc-v2
+     xmlns:gnc="http://www.gnucash.org/XML/gnc"
+     xmlns:act="http://www.gnucash.org/XML/act"
+     xmlns:book="http://www.gnucash.org/XML/book"
+     xmlns:cd="http://www.gnucash.org/XML/cd"
+     xmlns:cmdty="http://www.gnucash.org/XML/cmdty"
+     xmlns:price="http://www.gnucash.org/XML/price"
+     xmlns:slot="http://www.gnucash.org/XML/slot"
+     xmlns:split="http://www.gnucash.org/XML/split"
+     xmlns:sx="http://www.gnucash.org/XML/sx"
+     xmlns:trn="http://www.gnucash.org/XML/trn"
+     xmlns:ts="http://www.gnucash.org/XML/ts"
+     xmlns:fs="http://www.gnucash.org/XML/fs"
+     xmlns:bgt="http://www.gnucash.org/XML/bgt"
+     xmlns:recurrence="http://www.gnucash.org/XML/recurrence"
+     xmlns:lot="http://www.gnucash.org/XML/lot"
+     xmlns:job="http://www.gnucash.org/XML/job"
+     xmlns:invoice="http://www.gnucash.org/XML/invoice"
+     xmlns:addr="http://www.gnucash.org/XML/addr"
+     xmlns:cust="http://www.gnucash.org/XML/cust"
+     xmlns:billterm="http://www.gnucash.org/XML/billterm"
+     xmlns:bt-days="http://www.gnucash.org/XML/bt-days"
+     xmlns:bt-prox="http://www.gnucash.org/XML/bt-prox"
+     xmlns:taxtable="http://www.gnucash.org/XML/taxtable"
+     xmlns:tte="http://www.gnucash.org/XML/tte"
+     xmlns:order="http://www.gnucash.org/XML/order"
+     xmlns:employee="http://www.gnucash.org/XML/employee"
+     xmlns:entry="http://www.gnucash.org/XML/entry"
+     xmlns:owner="http://www.gnucash.org/XML/owner"
+     xmlns:vendor="http://www.gnucash.org/XML/vendor">
+<gnc:count-data cd:type="book">1</gnc:count-data>
+<gnc:book version="2.0.0">
+<book:id type="guid">ec7c150293d79985f48a13ed314b0656</book:id>
+
+<gnc:commodity version="2.0.0">
+  <cmdty:space>ASX</cmdty:space>
+  <cmdty:id>BEN</cmdty:id>
+  <cmdty:name>Bendigo Bank</cmdty:name>
+  <cmdty:xcode>BEN</cmdty:xcode>
+  <cmdty:fraction>10000</cmdty:fraction>
+  <cmdty:get_quotes/>
+  <cmdty:quote_source>yahoo_australia</cmdty:quote_source>
+  <cmdty:quote_tz/>
+</gnc:commodity>
+
+<gnc:account version="2.0.0">
+  <act:name>Root Account</act:name>
+  <act:id type="guid">51b9e2e96175e8acac1d89ac8bed7b3c</act:id>
+  <act:type>ROOT</act:type>
+</gnc:account>
+<gnc:account version="2.0.0">
+  <act:name>Brokerage</act:name>
+  <act:id type="guid">1aee52d32c1c8a35bd5f88b8f75725d0</act:id>
+  <act:type>STOCK</act:type>
+  <act:commodity>
+    <cmdty:space>ASX</cmdty:space>
+    <cmdty:id>BEN</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>10000</act:commodity-scu>
+  <act:parent type="guid">51b9e2e96175e8acac1d89ac8bed7b3c</act:parent>
+</gnc:account>
+
+<gnc:account version="2.0.0">
+  <act:name>Equity</act:name>
+  <act:id type="guid">d3e0d16bd78c7f53f9a22f6b50262f79</act:id>
+  <act:type>EQUITY</act:type>
+  <act:commodity>
+    <cmdty:space>ISO4217</cmdty:space>
+    <cmdty:id>AUD</cmdty:id>
+  </act:commodity>
+  <act:commodity-scu>100</act:commodity-scu>
+  <act:description>Equity</act:description>
+  <act:slots>
+    <slot>
+      <slot:key>placeholder</slot:key>
+      <slot:value type="string">true</slot:value>
+    </slot>
+  </act:slots>
+  <act:parent type="guid">51b9e2e96175e8acac1d89ac8bed7b3c</act:parent>
+</gnc:account>
+
+<gnc:transaction version="2.0.0">
+  <trn:id type="guid">15342cb65f015794071cc012674913c8</trn:id>
+  <trn:currency>
+    <cmdty:space>ISO4217</cmdty:space>
+    <cmdty:id>AUD</cmdty:id>
+  </trn:currency>
+  <trn:date-posted>
+    <ts:date>2010-04-25 00:00:00 +1000</ts:date>
+  </trn:date-posted>
+  <trn:date-entered>
+    <ts:date>2010-04-25 19:59:10 +1000</ts:date>
+  </trn:date-entered>
+  <trn:description>Share purchase</trn:description>
+  <trn:splits>
+    <trn:split>
+      <split:id type="guid">0f7b7a9784c0bf6af6634483b18e60c0</split:id>
+      <split:action>Buy</split:action>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>120960/100</split:value>
+      <split:quantity>1200000/10000</split:quantity>
+      <split:account type="guid">1aee52d32c1c8a35bd5f88b8f75725d0</split:account>
+    </trn:split>
+    <trn:split>
+      <split:id type="guid">fcdde42bd6798fb42b1df6a55e697fd9</split:id>
+      <split:reconciled-state>n</split:reconciled-state>
+      <split:value>-120960/100</split:value>
+      <split:quantity>-120960/100</split:quantity>
+      <split:account type="guid">d3e0d16bd78c7f53f9a22f6b50262f79</split:account>
+    </trn:split>
+  </trn:splits>
+</gnc:transaction>
+
+</gnc:book>
+</gnc-v2>
