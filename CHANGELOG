@@ -1,0 +1,6 @@
+= Changelog
+
+== 0.1 Initial release
+* Normal transactions
+* Reconciled transactions (if any split in gnucash is marked as reconciled, the entry in ledger is marked as cleared)
+* Commodities (only the initial price is used, doesn't convert price history yet)

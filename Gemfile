@@ -1,6 +1,9 @@
 source :rubygems
 
-gem 'rspec'
 gem 'nokogiri'
 gem 'builder'
 gem 'activesupport'
+
+group(:development) do
+  gem 'rspec'
+end

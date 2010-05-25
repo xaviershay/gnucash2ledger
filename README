@@ -1,0 +1,21 @@
+= gnucash2ledger
+
+A command-line script that converts GnuCash v2.X data files to human readable ledger format. Ledger v2 did this natively, but it has been removed from the v3 branch with the intention of replacing it with a script just like this one. This project is bridging the gap until such a script exists.
+
+== Quickstart
+
+  gem install gnucash2ledger
+  cat your/gnucash/datafile | gunzip | gnucash2ledger > new-ledger.dat
+  ledger -f new-ledger.dat bal
+
+== Status
+
+Works for me.
+
+* Normal transactions
+* Reconciled transactions (if any split in gnucash is marked as reconciled, the entry in ledger is marked as cleared)
+* Commodities (only the initial price is used, doesn't convert price history yet)
+
+== References
+* http://www.gnucash.org/
+* http://wiki.github.com/jwiegley/ledger/

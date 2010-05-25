@@ -1,12 +1,6 @@
-require 'spec'
-require File.dirname(__FILE__) + '/../lib/parser'
+require 'spec_helper'
 
 describe G2L::Input do
-  it 'does stuff' do
-    #input = File.open("spec/fixtures/money.xml").read
-    #puts G2L::Input.new(input).to_ledger
-  end
-
   it 'parses regular transactions' do
     input = File.open("spec/fixtures/plain_transaction.xml").read
     output = G2L::Input.new(input).to_ledger
@@ -65,22 +59,5 @@ describe G2L::Input do
       :header => x.lines.to_a[0].match(/([^\s]*)\s(?:(\*)\s)?(.*)/).captures,
       :raw    => output
     }}
-  end
-end
-
-Spec::Matchers.define :have_transaction do |desc, amount|
-  match do |actual|
-    parse_transactions(actual).detect {|tx|
-      tx[1] = tx[1][1..-1].to_f if tx[1].starts_with?('$')
-      tx[0] == desc && tx[1] == amount
-    }
-  end
-
-  failure_message_for_should do |actual|
-    "\nTransaction matching (#{desc}, #{amount}) not found in:\n" + actual + "\n"
-  end
-
-  def parse_transactions(input)
-    txs = actual.lines.to_a[1..-1].map {|x| x.match(/  (.*?)\s{5,}(.*)/).try(:captures) || [] }
   end
 end

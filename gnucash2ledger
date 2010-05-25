@@ -1,5 +1,0 @@
-#!/usr/bin/env ruby
-require 'rubygems'
-require File.dirname(__FILE__) + '/lib/parser'
-
-puts G2L::Input.new(ARGF.read).to_ledger
