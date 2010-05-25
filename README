@@ -1,6 +1,6 @@
 = gnucash2ledger
 
-A command-line script that converts GnuCash v2.X data files to human readable ledger format. Ledger v2 did this natively, but it has been removed from the v3 branch with the intention of replacing it with a script just like this one. This project is bridging the gap until such a script exists.
+A command-line script that converts GnuCash v2.2.9 data files to human readable ledger format. Ledger v2 did this natively, but it has been removed from the v3 branch with the intention of replacing it with a script just like this one. This project is bridging the gap until such a script exists.
 
 == Quickstart
 
@@ -10,7 +10,7 @@ A command-line script that converts GnuCash v2.X data files to human readable le
 
 == Status
 
-Works for me.
+Works for me on my Snow Leopard mac.
 
 * Normal transactions
 * Reconciled transactions (if any split in gnucash is marked as reconciled, the entry in ledger is marked as cleared)
