@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require File.dirname(__FILE__) + '/../lib/parser'
+require File.dirname(__FILE__) + '/../lib/input'
 
 puts G2L::Input.new(ARGF.read).to_ledger
