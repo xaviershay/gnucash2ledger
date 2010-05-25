@@ -1,5 +1,5 @@
 require 'spec'
-require File.dirname(__FILE__) + '/../lib/parser'
+require File.dirname(__FILE__) + '/../lib/input'
 
 Spec::Matchers.define :have_transaction do |desc, amount|
   match do |actual|

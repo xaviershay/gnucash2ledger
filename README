@@ -8,6 +8,15 @@ A command-line script that converts GnuCash v2.2.9 data files to human readable 
   cat your/gnucash/datafile | gunzip | gnucash2ledger > new-ledger.dat
   ledger -f new-ledger.dat bal
 
+== Developing
+
+You'll need git and bundler. You probably already have them eh.
+
+  git clone git://github.com/xaviershay/gnucash2ledger.git
+  cd gnucash2ledger
+  bundle install
+  bundle exec rake
+
 == Status
 
 Works for me on my Snow Leopard mac.
