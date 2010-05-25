@@ -38,7 +38,11 @@ module G2L
 
       # Generate output
       transactions.sort_by {|x| x[:date] }.map do |tx|
-        (["%s %s" % [tx[:date].strftime("%Y/%m/%d"), tx[:description]]] + tx[:splits].map {|split|
+        (["%s %s%s" % [
+          tx[:date].strftime("%Y/%m/%d"),
+          tx[:splits].any? {|y| y[:reconciled] } ? '* ' : '',
+          tx[:description]
+        ]] + tx[:splits].map {|split|
           "  %-44s$%s" % [accounts[split[:account]][:name], split[:value]]
         }).join("\n")
       end.join("\n\n")
